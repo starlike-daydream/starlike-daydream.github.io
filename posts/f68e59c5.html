@@ -1,0 +1,1216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><div id="myscoll"></div><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>MySQL02 | Ceasteo is here🥝</title><meta name="keywords" content="database"><meta name="author" content="Ceasteo🥝"><meta name="copyright" content="Ceasteo🥝"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="01.MySQL-DQL   DQL英文全称是Data Query Language(数据查询)语言），用来查询数据库表中的记录。   关键字：SELECT   重要性：查询这个操作是数据库中最常见、重要的操作，一个正常的业务系统中，查询基本可以占据90%以上   1.比如说CRM系统，每次点击左边的菜单栏都会发起一次或多次查询操作，点击课程管理菜单后会显示课程相关数据信息，前端只负责将数据以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL02">
+<meta property="og:url" content="https://www.fomal.cc/posts/f68e59c5.html">
+<meta property="og:site_name" content="Ceasteo is here🥝">
+<meta property="og:description" content="01.MySQL-DQL   DQL英文全称是Data Query Language(数据查询)语言），用来查询数据库表中的记录。   关键字：SELECT   重要性：查询这个操作是数据库中最常见、重要的操作，一个正常的业务系统中，查询基本可以占据90%以上   1.比如说CRM系统，每次点击左边的菜单栏都会发起一次或多次查询操作，点击课程管理菜单后会显示课程相关数据信息，前端只负责将数据以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp">
+<meta property="article:published_time" content="2023-12-05T08:29:09.000Z">
+<meta property="article:modified_time" content="2024-03-11T11:18:07.452Z">
+<meta property="article:author" content="Ceasteo🥝">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp"><link rel="shortcut icon" href="/"><link rel="canonical" href="https://www.fomal.cc/posts/f68e59c5"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MySQL02',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-03-11 19:18:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="https://cdn1.tianli0.top/npm/element-ui@2.15.6/packages/theme-chalk/lib/index.css"><style id="themeColor"></style><style id="rightSide"></style><style id="transPercent"></style><style id="blurNum"></style><style id="settingStyle"></style><span id="fps"></span><style id="defineBg"></style><style id="menu_shadow"></style><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Ceasteo is here🥝" type="application/atom+xml">
+</head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp" onerror="onerror=null;src='/assets/r1.jpg'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-home"></use></svg><span class="menu_word" style="font-size:17px"> 首页</span></a></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon--article"></use></svg><span class="menu_word" style="font-size:17px"> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-guidang1">                   </use></svg><span class="menu_word" style="font-size:17px"> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-sekuaibiaoqian">                   </use></svg><span class="menu_word" style="font-size:17px"> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-fenlei">                   </use></svg><span class="menu_word" style="font-size:17px"> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-pinweishenghuo"></use></svg><span class="menu_word" style="font-size:17px"> 休闲</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/life/music/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-yinle">                   </use></svg><span class="menu_word" style="font-size:17px"> 八音盒</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/life/movies/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-dianying1">                   </use></svg><span class="menu_word" style="font-size:17px"> 影院</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/life/games/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-youxishoubing">                   </use></svg><span class="menu_word" style="font-size:17px"> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-xiangzi"></use></svg><span class="menu_word" style="font-size:17px"> 八宝箱</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/box/gallery/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-tubiaozhizuomoban">                   </use></svg><span class="menu_word" style="font-size:17px"> 画廊</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/box/animation/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-nvwumao">                   </use></svg><span class="menu_word" style="font-size:17px"> 动画</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/box/nav/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-zhifengche">                   </use></svg><span class="menu_word" style="font-size:17px"> 网址导航</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-shejiaoxinxi"></use></svg><span class="menu_word" style="font-size:17px"> 社交</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/social/fcircle/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-pengyouquan">                   </use></svg><span class="menu_word" style="font-size:17px"> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-liuyan">                   </use></svg><span class="menu_word" style="font-size:17px"> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/social/link/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-lianjie">                   </use></svg><span class="menu_word" style="font-size:17px"> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-wangye"></use></svg><span class="menu_word" style="font-size:17px"> 网站</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/site/census/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon--tongjibiao">                   </use></svg><span class="menu_word" style="font-size:17px"> 网站统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/site/echarts/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-shujutongji1">                   </use></svg><span class="menu_word" style="font-size:17px"> 文章统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/site/time/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-xianxingshalou">                   </use></svg><span class="menu_word" style="font-size:17px"> 旧时光</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-maoliang"></use></svg><span class="menu_word" style="font-size:17px"> 个人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/personal/bb/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-qunliaotian">                   </use></svg><span class="menu_word" style="font-size:17px"> 唠叨</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/personal/love/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-love-sign">                   </use></svg><span class="menu_word" style="font-size:17px"> 恋爱小屋</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/personal/about/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-paperplane">                   </use></svg><span class="menu_word" style="font-size:17px"> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ceasteo is here🥝</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-home"></use></svg><span class="menu_word" style="font-size:17px"> 首页</span></a></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon--article"></use></svg><span class="menu_word" style="font-size:17px"> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-guidang1">                   </use></svg><span class="menu_word" style="font-size:17px"> 归档</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-sekuaibiaoqian">                   </use></svg><span class="menu_word" style="font-size:17px"> 标签</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-fenlei">                   </use></svg><span class="menu_word" style="font-size:17px"> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-pinweishenghuo"></use></svg><span class="menu_word" style="font-size:17px"> 休闲</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/life/music/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-yinle">                   </use></svg><span class="menu_word" style="font-size:17px"> 八音盒</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/life/movies/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-dianying1">                   </use></svg><span class="menu_word" style="font-size:17px"> 影院</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/life/games/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-youxishoubing">                   </use></svg><span class="menu_word" style="font-size:17px"> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-xiangzi"></use></svg><span class="menu_word" style="font-size:17px"> 八宝箱</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/box/gallery/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-tubiaozhizuomoban">                   </use></svg><span class="menu_word" style="font-size:17px"> 画廊</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/box/animation/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-nvwumao">                   </use></svg><span class="menu_word" style="font-size:17px"> 动画</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/box/nav/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-zhifengche">                   </use></svg><span class="menu_word" style="font-size:17px"> 网址导航</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-shejiaoxinxi"></use></svg><span class="menu_word" style="font-size:17px"> 社交</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/social/fcircle/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-pengyouquan">                   </use></svg><span class="menu_word" style="font-size:17px"> 朋友圈</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-liuyan">                   </use></svg><span class="menu_word" style="font-size:17px"> 留言板</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/social/link/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-lianjie">                   </use></svg><span class="menu_word" style="font-size:17px"> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-wangye"></use></svg><span class="menu_word" style="font-size:17px"> 网站</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/site/census/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon--tongjibiao">                   </use></svg><span class="menu_word" style="font-size:17px"> 网站统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/site/echarts/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-shujutongji1">                   </use></svg><span class="menu_word" style="font-size:17px"> 文章统计</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/site/time/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-xianxingshalou">                   </use></svg><span class="menu_word" style="font-size:17px"> 旧时光</span></a></li></ul></div><div class="menus_item"><a class="site-page group faa-parent animated-hover hide" href="javascript:void(0);"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-maoliang"></use></svg><span class="menu_word" style="font-size:17px"> 个人</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/personal/bb/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-qunliaotian">                   </use></svg><span class="menu_word" style="font-size:17px"> 唠叨</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/personal/love/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-love-sign">                   </use></svg><span class="menu_word" style="font-size:17px"> 恋爱小屋</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/personal/about/"><svg class="menu_icon faa-tada" aria-hidden="true" style="width:1.30em;height:1.30em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-paperplane">                   </use></svg><span class="menu_word" style="font-size:17px"> 关于</span></a></li></ul></div></div><center id="name-container"><a id="page-name" href="javascript:scrollToTop()">PAGE_NAME</a></center><div id="nav-right"><div id="search-button"><a class="search faa-parent animated-hover" title="检索站内任何你想要的信息"><svg class="faa-tada icon" style="height:24px;width:24px;fill:currentColor;position:relative;top:6px" aria-hidden="true"><use xlink:href="#icon-valentine_-search-love-find-heart"></use></svg><span> 搜索</span></a></div><a class="meihua faa-parent animated-hover" onclick="toggleWinbox()" title="美化设置-自定义你的风格" id="meihua-button"><svg class="faa-tada icon" style="height:26px;width:26px;fill:currentColor;position:relative;top:8px" aria-hidden="true"><use xlink:href="#icon-tupian1"></use></svg></a><a class="sun_moon faa-parent animated-hover" onclick="switchNightMode()" title="浅色和深色模式转换" id="nightmode-button"><svg class="faa-tada" style="height:25px;width:25px;fill:currentColor;position:relative;top:7px" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon">       </use></svg></a><div id="toggle-menu"><a><i class="fas fa-bars fa-fw"></i></a></div></div></div></nav><div id="post-info"><h1 class="post-title">MySQL02</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><svg class="meta_icon post-meta-icon" style="width:30px;height:30px;position:relative;top:10px"><use xlink:href="#icon-rili"></use></svg><span class="post-meta-label">发表于 </span><time class="post-meta-date-created" datetime="2023-12-05T08:29:09.000Z" title="发表于 2023-12-05 16:29:09">2023-12-05</time><span class="post-meta-separator">|</span><svg class="meta_icon post-meta-icon" style="width:18px;height:18px;position:relative;top:5px"><use xlink:href="#icon-gengxin1"></use></svg><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-11T11:18:07.452Z" title="更新于 2024-03-11 19:18:07">2024-03-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><svg class="meta_icon post-meta-icon" style="width:18px;height:18px;position:relative;top:5px"><use xlink:href="#icon-biaoqian"></use></svg><a class="post-meta-categories" href="/categories/Computer-Learning/">Computer Learning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><svg class="meta_icon post-meta-icon" style="width:25px;height:25px;position:relative;top:8px"><use xlink:href="#icon-charuword"></use></svg><span class="post-meta-label">字数总计:</span><span class="word-count">6297</span><span class="post-meta-separator">|</span><svg class="meta_icon post-meta-icon" style="width:20px;height:20px;position:relative;top:5px"><use xlink:href="#icon-shizhong"></use></svg><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MySQL02"><svg class="meta_icon post-meta-icon" style="width:25px;height:25px;position:relative;top:5px"><use xlink:href="#icon-eye"></use></svg><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><ul>
+<li>
+<p>01.MySQL-DQL</p>
+<ul>
+<li>
+<p>DQL英文全称是Data Query Language(数据查询)语言），用来查询数据库表中的记录。</p>
+</li>
+<li>
+<p>关键字：SELECT</p>
+</li>
+<li>
+<p>重要性：查询这个操作是数据库中最常见、重要的操作，一个正常的业务系统中，查询基本可以占据90%以上</p>
+<ul>
+<li>
+<p>1.比如说CRM系统，每次点击左边的菜单栏都会发起一次或多次查询操作，点击课程管理菜单后会显示课程相关数据信息，前端只负责将数据以好看的样式展示出来，最终的数据都是在数据库中存储和管理的(比如课程中的一条数据对应着数据库表结构当中的一条记录，当我们点击课程管理菜单后，就可以将数据库表结构中的数据查询出来)<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/063038da-0204-4253-a98c-7a202635343a-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>2.页面也允许用户在上面根据条件查询（比如在课程名称中输入Java，就可以查询出课程名称中含有Java关键字的课程，添加条件适用人群为小白学员，就可查询到对应数据,也可查询时间范围，对数据排序，分页展示数据加快页面加载速度，同时提高了用户使用体验）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/4ac0f5e2-a604-41e0-9aa4-086af80d3197-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>语法：</p>
+<ul>
+<li>
+<p>select 字段列表 from 表名列表 where 条件列表 group by 分组字段列表 hanving 分组后条件列表 order by 排序字段列表 limit 分页参数</p>
+</li>
+<li>
+<p>基本查询：select 字段列表 from 表名列表（字段列表代表我们要查询表中的哪些字段，字段之间用逗号分隔，from后面跟上表名列表，也就是说我们可以从多张表中进行查询）</p>
+</li>
+<li>
+<p>条件查询（where）：在基本查询后面可以加上where，where后面跟上条件列表（可以有多个条件）</p>
+</li>
+<li>
+<p>分组查询（group by）：group by跟上要分组的字段，如果分组之后还要进行条件的筛选，还需要加上关键字having，having之后加的是分组的条件</p>
+<ul>
+<li>比如有一张员工表，里面有一个字段是gender性别，要想知道男性员工和女性员工各有多少人，就可以用性别字段进行分组，分完组之后再统计男性女性个多少人</li>
+</ul>
+</li>
+<li>
+<p>排序查询（order by）：order by后跟上排序的字段（支持对多个字段进行排序）</p>
+</li>
+<li>
+<p>分页查询（limit）：在sql语句的后面加上一个关键字limit，limit之后跟上分页参数</p>
+</li>
+<li>
+<p>ppt图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/07894e28-75c1-4142-adf8-1d47ddabab19-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>准备测试数据：数据库db03下操作，新建控制台mysql_02，资料DQL第一个sql脚本双击打开（其中是上节课的表，插上许多数据），cv到idea，全选执行在db02创建一张表，含29条数据</p>
+</li>
+<li>
+<p>01.DQL-基本查询</p>
+<ul>
+<li>
+<p>语法</p>
+<ul>
+<li>
+<p>查询多个字段：select 字段1,字段2,字段3 from 表名;</p>
+</li>
+<li>
+<p>查询所有字段（通配符）：select * from 表名;（不推荐：1.不直观，2.性能低）</p>
+</li>
+<li>
+<p>设置别名：select 字段 [ as  别名1 ], 字段2 [ as 别名2 ] from 表名;（不需要写方括号，只代表可选）</p>
+</li>
+<li>
+<p>去除重复记录：select distinct 字段列表 from 表名;</p>
+</li>
+</ul>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/fe110f67-cd9c-4d53-9228-630d5101e794-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>自己写的<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/43f12c26-62b7-48b3-8685-46598d6a6f31-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>老师的（工作几种？最后的null代表还没有分配职位，职位一共有四种）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/76bfaec1-9b07-424e-99fc-f4314d1249c3-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>tips：</p>
+<ul>
+<li>
+<p>1.写好select 查询的字段之后会报错，不用管，因为没有表名，他不知道指定的字段存不存在，写好from加表名就不会报错了，这些字段已经被识别出来了</p>
+</li>
+<li>
+<p>2.要写多个或所有字段的话可以先打出selrct from 表名;然后再打字段列表，这样就会有字段和全部字段的提示。</p>
+</li>
+<li>
+<p>3.以后写项目要查询所有字段推荐写select 字段1,字段2,… from 表名（先打出后面的），而不推荐select * from 表名：1.不直观2.性能低（课上节省时间会使用*）</p>
+</li>
+<li>
+<p>4.起别名的as可以省略，但是别名中如果有空格或者特殊符号需要给别名加上引号（单引号/双引号）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ppt图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/cd736532-283d-476c-8e1f-f9c44e004a1e-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>02.DQL-条件查询</p>
+<ul>
+<li>
+<p>语法—条件查询：select 字段列表 from 表名 where 条件列表;</p>
+</li>
+<li>
+<p>条件列表的条件可以有多个，学习条件查询主要就是学会条件的构建方式，并且SQL语句中构建条件的运算符有很多，主要分为比较运算符和逻辑运算符</p>
+</li>
+<li>
+<p>比较运算符</p>
+<ul>
+<li>
+<p>&gt;：大于，&gt;=：大于等于，&lt;：小于，&lt;=：小于等于</p>
+</li>
+<li>
+<p>&lt;&gt; 或  != ：不等于，=：等于</p>
+</li>
+<li>
+<p>between … and … ：在某个范围之内（含最小、最大值）（between后跟上最小值，and后跟上最大值）</p>
+</li>
+<li>
+<p>in(…)：在in之后的列表中的值，多选一</p>
+</li>
+<li>
+<p>like 占位符：模糊匹配（_匹配单个字符，%匹配任意个字符）</p>
+</li>
+<li>
+<p>is null：是null</p>
+</li>
+</ul>
+</li>
+<li>
+<p>逻辑运算符：</p>
+<ul>
+<li>
+<p>and 或 &amp;&amp;：并且（多个条件同时成立）</p>
+</li>
+<li>
+<p>or 或 || ：或者（多个条件任意一个成立）</p>
+</li>
+<li>
+<p>not 或 ! ：非，不是</p>
+</li>
+</ul>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/de2cec54-d1ab-4559-bc32-5222bb14f8b4-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/6ad36574-8b67-4437-8ad5-b60daebf45ac-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>代码（我的和老师的大差不差）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/980026a9-7163-4d4c-853c-d709e9e8b3ef-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>tips</p>
+<ul>
+<li>
+<p>1.select * from tb_emp where name = ‘杨逍’;因为name是字符串，所以杨逍也要用引号引起来</p>
+</li>
+<li>
+<p>2.null只能用is判断，而不像其他数据类型用=判断</p>
+</li>
+<li>
+<p>3.查询结果显示台可以看到查询到数据的条数<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/fdcdefb4-e3d0-4cb3-ab18-fbfefcc3e629-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>4.并列条件and和&amp;&amp;双与的效果是一样的，只不过sql语句一般写and</p>
+</li>
+<li>
+<p>5.如果有范围可以用between and 来代替&gt;= &lt;= ，日期也能用于比较运算哦</p>
+</li>
+<li>
+<p>6.如果查询多个确定的值，就可以in(),里面放上这些值即可（满足其中一个即可）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ppt图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/5b26cf73-26b4-4281-9b32-c5e402158baa-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>03.DQL-分组查询</p>
+<ul>
+<li>
+<p>先进行聚合函数的讲解：分组查询操作一般会伴随着聚合统计进行</p>
+<ul>
+<li>比如说我们要根据员工的性别来进行分组，分别计算男性员工多少人，女性员工多少人，既要根据gender这个字段进行分组，还要进行分组之后的聚合统计操作，这里就会涉及到数据库中的聚合函数</li>
+</ul>
+</li>
+<li>
+<p>聚合函数：</p>
+<ul>
+<li>
+<p>介绍：将一列数据作为一个整体，进行纵向计算。</p>
+</li>
+<li>
+<p>语法：select 聚合函数(字段列表) from 表名;</p>
+</li>
+<li>
+<p>常见聚合函数：</p>
+<ul>
+<li>
+<p>count：统计数量</p>
+</li>
+<li>
+<p>max：最大值</p>
+</li>
+<li>
+<p>min：最小值</p>
+</li>
+<li>
+<p>avg：平均值</p>
+</li>
+<li>
+<p>sum：求和</p>
+</li>
+</ul>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/f042f426-df92-4061-bdfd-1c5ff504c317-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/d6975e77-2b0d-4ee7-93d6-5c8568f10c43-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>tips</p>
+<ul>
+<li>
+<p>1.聚合函数不对null值进行运算，所以要统计数据数，要count非空字段，比如说name，username都是非空字段</p>
+<ul>
+<li>
+<p>count员工表是id数<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/488d4f47-4e72-4713-854d-4da16d2ba43a-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>count员工表job数（含一个job为null的员工）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a87681d4-c683-47bf-8d12-1ee4e0857ccb-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>2.count()函数参数里可以放三个类型的东西：1.count(字段)2.count(常量)3.count(*)    &lt;–推荐</p>
+<ul>
+<li>
+<p>1.常量可以是数字0，1，2，3…或者是字符串’A’，只要count一个不为null的常量都可以，因为null不参与聚合函数的运算<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/ab6d1290-b707-49b8-a9a8-c66a75c7ac13-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>2.<em>是通配的意思，通过</em>就可以求这取张表的总数据量，项目开发时推荐使用count(*)，因为MySQL数据库底层专门对此做了优化处理</p>
+</li>
+</ul>
+</li>
+<li>
+<p>3.avg()求平均值的返回值是有小数的</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ppt图示<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/e909ca2d-3dd5-489f-a7e1-3cf774d7f0f9-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>分组查询–语法：select 字段列表 from 表名 [ where 条件 ] group by 分组字段名 [ having 分组后过滤条件 ];</p>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/7d881b18-abf8-4e35-9d8c-85573c408973-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/33797200-40db-429f-a12c-2ae16fbb264c-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>老师的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/81518e3f-c3cf-4279-b66a-42cfe67bdc9f-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>tips</p>
+<ul>
+<li>
+<p>1.在分组查询的字段列表写<em>会报错，因为分组了，再写</em>就没意义了，所以这里可以写的是分组字段和聚合函数 （分组字段后返回的数据是这两类）</p>
+</li>
+<li>
+<p>2.想要写分组的过滤条件，不能写在where后面，因为在where之后不能写count聚合函数，只能写在关键字having之后加上聚合函数构建的条件</p>
+</li>
+</ul>
+</li>
+<li>
+<p>面试题：where与having的区别</p>
+<ul>
+<li>
+<p>1.执行时机不同：where是分组之前进行过滤，不满足where条件，不参与分组；而having是分组之后对结果进行过滤。</p>
+</li>
+<li>
+<p>2.判断条件不同：where不能√聚合函数进行判断，而having可以。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>注意事项：</p>
+<ul>
+<li>
+<p>分组之后，查询的字段一般为聚合函数和分组字段，查询其他字段无任何意义。</p>
+</li>
+<li>
+<p>执行顺序：where  &gt; 聚合函数 &gt; having。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>ppt图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/0c817688-62f3-4113-a3e5-356bc130f460-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>04.DQL-排序查询</p>
+<ul>
+<li>
+<p>语法–排序查询：select 字段列表 from 表名 [ where 条件列表 ] [ group by 分组字段 ] order by 字段1 排序方式1,字段2 排序方式2… ；</p>
+</li>
+<li>
+<p>排序方式：1.ASC：升序（默认值）2.DESC：降序</p>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/53ad6b0d-4674-41f5-a555-cf3470ff5dc2-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/0f8f8ffb-d25c-4d72-9c27-ce47fb98e463-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>老师的代码（ASC报黄是因为多余了）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/bbad5e43-a613-4be0-938d-bed0f2c83010-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>sql语句中只有第一个排序字段相同时，才会根据第二个排序字段进行排序</p>
+</li>
+<li>
+<p>ppt图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/cf18e020-9277-4363-93ac-94dcd66058d6-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>05.DQL-分页查询</p>
+<ul>
+<li>
+<p>场景：分页查询非常常见，如果说我们一次性查询出来的数据比较多，就会进行分页展示，以提高用户的使用体验</p>
+<ul>
+<li>
+<p>比如说京东的搜索页面，它的最下方就有一个这样的分页条，数据分页之后，用户点击对应的页码，就可以加载出这一页的最新数据<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/dcafa3c5-b6c7-4fec-b6a8-fd526a34dacd-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>2.再比如说CRM的课程管理菜单，用户在查看数据的时候，只需要点击对应的页码，就可以加载出这一页的数据<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a5103272-5545-46a5-871a-1adfa063bc3a-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>语法-分页查询：select 字段列表 from 表名 limit 起始索引,查询记录数;</p>
+<ul>
+<li>查询语句后面加上关键字limit，limit之后指定两个分页参数，用逗号分隔（起始索引：指的是我们要从哪一条数据往后进行查询，起始索引是从零开始的。查询记录数：指的是这一页需要展示多少条数据）</li>
+</ul>
+</li>
+<li>
+<p>需求</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a1e49108-33ac-4843-b821-9ad27fcba12d-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我的代码（×：起始页码是1，所以第一条和第二条一样，下面也是，多了，需求2，3，4起始索引应该是0，5，10）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/20522816-e319-41a3-a447-e2103d7a4235-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>修改后+查询结果展示<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/9facc39c-504c-4e74-903d-afabe5f9ff82-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>起始索引 = （页码 - 1） * 每页展示记录数</p>
+</li>
+<li>
+<p>tip：查询记录数就是查询结果会展示的记录数，从起始索引开始展示，表中的每条数据的索引就是正常的序号-1</p>
+</li>
+<li>
+<p>注意事项：</p>
+<ul>
+<li>
+<p>1.起始索引从0开始，起始索引 = （查询页码 - 1） * 每页显示记录数。</p>
+<ul>
+<li>将来前端并不会把起始索引传过来，它传递的都是页码，比如说查询第1，2，3…页，传递过来后，我们需要在执行SQL语句时，把页码换算成对应的起始索引</li>
+</ul>
+</li>
+<li>
+<p>2.分页查询是数据库的方言，不同的数据库有着不同的实现，MySQL中是LIMIT。</p>
+<ul>
+<li>Oracle数据库是通过row number伪列配合子查询实现的</li>
+</ul>
+</li>
+<li>
+<p>3.如果查询的是第一页数据，起始索引可以省略，直接简写为limit 10。（起始索引默认为0）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>06.DQL-案例</p>
+<ul>
+<li>
+<p>案例一</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/bbfd2d7e-deb7-4a8e-aab8-de99386da44b-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/3229fb3d-c7d6-45cb-a007-694f66c6809f-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>写代码要看啊页面原型的需求<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/31ba8776-d7d3-4f99-81f2-b344d48827fb-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>老师的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/675e539a-cc46-40f5-8ac1-2c6789b0f883-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>tip：1.模糊匹配可以在要模糊查询的字前后都加上%2.选中SQL语句，ctrl+Alt+L对选中SQL语句格式化3.完成案例时，一定要按照页面原型和需求文档来编写对应的SQL</p>
+</li>
+</ul>
+</li>
+<li>
+<p>案例二</p>
+<ul>
+<li>
+<p>题目： 这类的需求也叫弧形报表，就是做数据统计，然后再将统计好的数据以可视化的形式展示出来<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/b85c60a2-3162-4d21-be52-ffefe7d3e348-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>分析：我们只需要统计男性员工和女性员工多少人就可以了，我们把数据统计出来后返回给前端数据，前端数据再借助一些现成的报表组件库就可以完成报表的渲染展示了</p>
+</li>
+<li>
+<p>这里以ECharts为例，Echarts是百度开源的一个组件库，现在已经是Apache的孵化项目，所以域名是<a target="_blank" rel="noopener" href="http://apache.org/">apache.org</a>，官网是<a target="_blank" rel="noopener" href="http://echarts.apache.org/">echarts.apache.org</a>，点击所有事例就能看到Echarts给我们提供的所有报表组件（折线图/柱状图/饼状图），点开后就可以看到左侧的JS源码和右侧的效果预览图</p>
+</li>
+<li>
+<p>去除底部的data的三栏数据，修改剩下两栏的name属性值，修改series的name属性值，完成了一个简单的报表<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/d72ce18a-8eca-47b5-a48f-e61e8b3f6e77-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>而这部分最核心的就是数据，需要从数据库中查询出来</p>
+</li>
+<li>
+<p>我的代码<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/f8b8bdab-a4c5-4f32-9913-3f6d326e3554-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a53cbc12-6046-4d8d-9aec-88fa14f1be8e-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>但是需要的是男和女字样，所以还要改成男性员工，女性员工，需要用if函数：if(条件表达式,true取值,false取值)，但是这样写表头比较长，可以跟上性别作为别名<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/cebd9964-b0bc-4f56-bc6c-c857fd67774e-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/aef3d5f6-0789-49e3-90d5-c77b115fc7f9-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>第二个案例需要转化四个字样，就可以用另外一个流程控制函数case()：case 表达式 when 值1 then 结果1 when 值2 then 结果2 … else … end（类似Java的switch函数），写完打上括号起别名即可<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/f37a24be-8023-4963-b5d5-eeaf55d3ee6f-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/ec16e598-d6c0-48b6-b09d-657783cc5e91-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>案例小结图示</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/4b62c96e-1956-472b-b7bc-fd2577d5a685-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>DQL小结</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/81f82f5b-2cb8-47b8-bac9-8300c46111aa-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>02.多表设计</p>
+<ul>
+<li>
+<p>概述：项目开发中，在进行数据库表结构设计时，会根据业务需求以及业务模块之间的关系，分析并设计表结构，由于业务之间相互关联，所以各个表结构之间也存在着各种联系，基本分为三种：</p>
+<ul>
+<li>电商网站中，有很多的商品数据，每个商品都有一个品牌，比如说华为或者联想，然而某一个商品也要归属于商品分类中的一类，而且一个商品有很多规格，而一种规格可能很多商品都有，业务关系错综复杂<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/89d6c6f7-dfc8-483c-93cc-39925e66f840-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/bd8a8126-fe19-4815-a788-9b9056de814b-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>一对多（多对一）</p>
+<ul>
+<li>
+<p>需求：</p>
+<ul>
+<li>
+<p>根据页面原型及需求文档，完成部门及员工模块的表结构设计（一个部门有多个员工，但一个部门只能属于一个员工）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/9eec015c-554a-48f7-bc62-6b57c0ca4ef0-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我写的<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/eb77c2b3-9788-42a3-9f0f-7dac552fb46f-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>老师的<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/46675728-47ae-4f4a-88ca-979e8675afd1-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>完善先前员工表的归属部门，类型与部门表的id一样<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/3e27bcad-5a57-4b4b-91da-19d71dbaf5c3-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>这样一来，员工表的dept_id关联的就是部门表的主键，比如说2号部门是教研部<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/c1a68ae4-9bbd-4625-b49a-d467b32ec8b5-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>这层关系中：部门表示一的一方，员工表示多的一方，一个部门会对应多个员工，但一个员工只能归属多个部门，所以在一对多的关系中，我们也把一的一方叫做父表，多的一方叫做子表，因为一个父亲可以有多个儿子，但一个儿子只能有有一个父亲</p>
+</li>
+<li>
+<p>总结：只需要在数据库表结构中多的一方来增加一个字段关联一的一方的主键就可以了</p>
+</li>
+</ul>
+</li>
+<li>
+<p>外键</p>
+<ul>
+<li>
+<p>多表问题分析</p>
+<ul>
+<li>
+<p>插入测试数据（资料第一个文件，cvINSERT语句，选中执行）</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/ac0f0ef2-c1be-460d-9958-ec1a65d4c56f-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>删除id为一的部门学工部，但是员工表中id为一的员工依然存在</p>
+<ul>
+<li>图示<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/9fd0e362-306f-41ce-b7ab-649b80af2114-8085313.jpg" alt="img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/89ffca44-7c3a-4504-923f-221122343e9d-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>现象：部门数据可以直接删除，然而还有部分员工归属于该部门下，此时就出现了数据的不完整】不一致问题</p>
+</li>
+<li>
+<p>问题原因分析：目前上述的两张表，在数据库层面，并未建立关联，所以是无法保证数据的一致性和完整性的。（刚刚只在逻辑上完成了dept_id和dept的统一，但是数据库层面并未建立任何联系）</p>
+</li>
+<li>
+<p>解决办法：外键约束（我们所学的第五种约束）</p>
+</li>
+</ul>
+</li>
+<li>
+<p>外键语法</p>
+<ul>
+<li>
+<p>创建表时指定：create table 表名(    字段名     数据类型,…[constraint] [外键约束] foreign key(外键字段名) references 主表(字段名)            );</p>
+</li>
+<li>
+<p>建完表后，添加外键：alter table 表名 add constraint 外键名称 foreign key(外键字段名) references 主表(字段名);</p>
+</li>
+</ul>
+</li>
+<li>
+<p>图形化界面添加外键：（首先先恢复数据，否则会报错-数据不完整）</p>
+<ul>
+<li>
+<p>1.右击子表表格，选择Modify Table修改表</p>
+</li>
+<li>
+<p>2.点击上面的Foreign Keys，点击加号添加外键</p>
+</li>
+<li>
+<p>\3. Name指的是要添加的外键字段名字，Target Table指的是要关联的主表</p>
+</li>
+<li>
+<p>4.旁边的Colums的from填子表的要关联的字段，To填父表要关联的字段</p>
+</li>
+<li>
+<p>图形化操作图示<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a5d2c79d-1cdb-4cb9-a9fd-0a6dcc4f3697-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>表格中带蓝色钥匙字段的就是外键</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/db11c20b-87cc-4a5e-8952-95fcf8ca6f4c-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>此时再次删掉部门表的部门会报错：不能删掉父表的一列，因为有一个外键约束（tb_emp的dept_id字段）</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/c18313d3-a993-4a9d-9ca0-666a81f9746d-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>而删掉五号部门就可以，因为emp表中的员工没有任何一个部门关联五号部门</p>
+</li>
+<li>
+<p>物理外键（用的很少，甚至禁用）</p>
+<ul>
+<li>
+<p>概念：使用foreign key定义外键关联另外一张表。（刚刚添加的外键）</p>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li>
+<p>1.影响增删改效率（需要检查外键关系）。</p>
+</li>
+<li>
+<p>2.仅用于单节点数据库，不适用于分布式、集群场景。（比如大项目分库分表）</p>
+</li>
+<li>
+<p>3.容易引发数据库的死锁问题，消耗性能。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>逻辑外键（业务开放中推荐使用）</p>
+<ul>
+<li>
+<p>概念：在业务层逻辑中，解决外键关联（数据库层面刚刚建立的外键delete按钮直接删掉，删掉之后就没有物理外键关联了，这样就解决了物理外键的几个问题，此时就需要在业务代码中通过代码来保证数据的一致性和完整性）</p>
+</li>
+<li>
+<p>通过逻辑外键，就可以很方便的解决上述问题。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>一对一</p>
+<ul>
+<li>
+<p>案例：用户与身份证信息的关系</p>
+<ul>
+<li>
+<p>一张用户信息表，基本信息（id、姓名、性别、手机号、学历）和身份信息（生日，身份证号，签发机关，有效期开始时间、结束时间），如果在业务系统中基本信息的查询频率特别高，但身份信息查询频率很低，出于查询效率的考虑，就可以将这张大表拆分成两张小表<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/be8d686c-b8bc-438c-bb63-dfba8cd21ddf-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>一张是用户基本信息表(tb_user)，一张是用户身份信息表（tb_user_card），这两张表就是一对一的关系，一个用户只能关联一个身份证号，一个身份证号又只能对应一个用户，<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/8663e9d5-99be-4fcb-8355-46328275d263-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>那如何在数据库层面体现一对一的关系呢，其实只要把它看作一种特殊的一对多，在任意一张表添加外键即可，这个外键要关联另外一方的主键，为了保证一对一的关系，可以为这个外键加上约束UNIQUE唯一约束，这样就保证了一个用户不能对应两个身份证<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/0598056b-a7bb-425d-8cf8-8e265c048c59-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>关系：一对一关系：多用于多表拆分，将一张表的基础字段放在一张表中，其他字段放在另一张表中，以提升操作效率</p>
+</li>
+<li>
+<p>实现：在任意一方加入外键，关联另外一方的主键，并设置外键为唯一的（UNIQUE）</p>
+</li>
+<li>
+<p>例如查询 白眉鹰王用户的身份证号：查询白眉鹰王的id根据用户id到身份表查询身份证号即可</p>
+</li>
+<li>
+<p>此时修改身份表的用户id都为一，就会报错</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/5dd5c3f6-9ff1-44f1-be46-718e9cecf96f-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>多对多</p>
+<ul>
+<li>
+<p>案例：学生与课程的关系</p>
+</li>
+<li>
+<p>关系：一个学生可以选修多门课程，一门课程也可以供多个学生选择</p>
+</li>
+<li>
+<p>但是多对多就不能像一对多或者多对多一样添加外键，因为无法在一个单元格放入多个值</p>
+<ul>
+<li><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/80bb1067-d213-4cfc-b288-a300354f61e3-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>实现：建立第三章中间表，中甲表至少包含两个外键，分别关联两方主键</p>
+<ul>
+<li>
+<p>比如说查询黛绮丝，id为1的学生选修了几门课程，在学生课程关系表一目了然，courseid是123，在课程表对应Java，PHP，MySQL<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/cfbc7901-65d9-4089-abe7-a10b505ddeb4-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>再比如说想看有几个学生选了Java课程，拿着Java课程的id：1取学生课程关系表寻找也能一目了然：两位位id–1和2，就可以根据这个studentid当学生表查找数据，最终就知道黛绮丝和谢逊选修了Java<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/ac8689c9-2c11-45d8-a018-09827d4dd478-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>例如</p>
+<ul>
+<li>建表语句：关系表通过设置外键关联了学生表和课程表（物理外键，但是项目开放中物理外键已经很少用了）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/7e8eb769-a0df-411e-a9e0-b62ed7ba8d63-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>显示关系图</p>
+<ul>
+<li>
+<p>ctrl多选选中三张表，选择Diagrams，再选择Show Visualization查看<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/354fce4d-483f-47fc-8b64-0cda8c8a315a-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>关系图<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/02b7cb7f-3d12-4ea0-9030-2dc8dc1275c3-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>案例</p>
+<ul>
+<li>
+<p>题目<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/581b709b-15cb-4cb9-963a-9cb7d712b840-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>我写的<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/4c7ca54f-94b0-4ac5-9ed2-122eb2dd14e7-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>打开资料中的苍穹外卖页面原型（管理后台：登录.html打开，点击登录进去；用户端：点餐.html打开）</p>
+</li>
+<li>
+<p>介绍：餐厅的老板和员工都可以打开管理端，登录到管理后台，配置菜品分类，套餐分类等，当后台配置后，用户就可以基于微信小程序进行点餐了，</p>
+<ul>
+<li>点菜界面左侧是菜品分类，右侧就是该分类的菜品列表，点击加号就可以完成点餐列表<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/9b568f22-3898-405a-bd5d-5f67fbea8a52-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>步骤：（要掌握）</p>
+<ul>
+<li>
+<p>1.阅读页面原型及需求文档，分析各个模块涉及到的表结构，及表结构之间的关系。</p>
+</li>
+<li>
+<p>2.根据页面原型及需求文档，分析各个表结构中具体的字段及约束。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>1.关系分析：</p>
+<ul>
+<li>
+<p>分类与菜品：一个分类可以有多菜品，但是一个菜品只能有一个分类，是一对多的关系，所以在多的一方添加外键即可，也就是分类的id<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/da626559-ae42-4efa-820b-4406551eb9af-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>分类和套餐的关系：一个分类对应多个套餐，但是一个套餐只能有一个分类（一对多）<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/4ea602c0-5037-4ba2-b17e-c212decad6f6-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>添加套餐时，冠以选择关联的菜品，那就说明一个套餐对应多个菜品，但是一个菜品也能添加在不同的套餐中，所以菜品和套餐是多对多的关系，在数据库层面需要通过建立一张中间表来实现，中间表有两个字段，分别是两张表的主键<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/428ea628-20de-4e32-828d-bd90bbcbfe03-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>最终的关系示意图<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/5d01d97c-0414-4c2a-9d60-74ace5544fd0-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>2.字段类型及约束分析：</p>
+<ul>
+<li>
+<p>分类管理页面可以看到有哪些字段，往后拉能看到页面说明</p>
+</li>
+<li>
+<p>基于图形化界面创建表（工作绝大多数情况下都是根据图形化界面来操作，简单方便）</p>
+</li>
+<li>
+<p>一、分类表category</p>
+<ul>
+<li>
+<p>1.添加主键id，类型无符号整型，主键约束，注释：主键ID</p>
+</li>
+<li>
+<p>2.菜品/套餐名称限制在=字符范围：2-20字符，变相的说明了该字段是非空的，页面原型和需求中没有说明分类是唯一的，我们不确定的话可以找产品经理做一个确认，有可能没有清晰表示出来，确定好这个字段是唯一的，就勾选上unique唯一约束，有不清楚的字段一定要确认，非空，这里先加上唯一约束</p>
+</li>
+<li>
+<p>3.分类类型只有两类，直接用标识代替即可（无符号小范围整数），非空</p>
+</li>
+<li>
+<p>5.状态就两个值，要么启用，要么停用，这里用tinyint类型，无符号，约定0是停用，1是启用，默认就为0，需要勾上非空，有默认值，而且二选一</p>
+</li>
+<li>
+<p>6.最后添加两个基础字段create_time创建时间和update_time修改时间，非空，类型为datetime，至此建好了分类表<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/1135a38d-13c3-4034-9a0e-d7dc9f54de3b-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>二、菜品表dish（字段说明在新建菜品中，口味选择暂不考虑）（这里用的逻辑外键）</p>
+<ul>
+<li>
+<p>1.菜品分类关联分类表的主键：category_id,类型与分类表主键类型一致–int unsigned</p>
+</li>
+<li>
+<p>2.价格长度限制在8位，还有两位小数，那就用deciaml(8,2)：总共8位，保留两位小数</p>
+</li>
+<li>
+<p>3.图片并非储存图片，而是图片的存储路径，而且长度比较长，用varchar(300)<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/e9ae6496-5c49-4653-b5f2-73b88b4b2f57-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>三、套餐表setmeal（字段说明在新建套餐页面中）（完成此表即建立好了分类和菜品，分类和套餐的关系）</p>
+<ul>
+<li>套餐菜品在中间表创建，不在套餐表创建<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/401691d7-1e2c-4f5b-8df7-6ffabc571e87-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+<li>
+<p>套餐菜品关系表setmeal_dish</p>
+<ul>
+<li>
+<p>基础字段id主键要有</p>
+</li>
+<li>
+<p>关联的两张表的主键，setmeal_id字段和dish_id字段</p>
+</li>
+<li>
+<p>但是还有一个份数字段需要添加，因为在添加套餐时需要指定添加菜品份数，用tinyint unsigned即可<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/a3846dea-c0aa-41b7-904b-7f6a198ee99e-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>这里中间表就不用添加create_time和update_time的基础字段了<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/039528d9-ccfc-4cb8-ad61-8a48bf945931-8085313.jpg" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>最后梳理一下这四张表的关系：</p>
+<ul>
+<li>
+<p>1.分类表与菜品表是一对多的关系，一个分类下对应多个菜品，菜品表中有个外键字段category_id，关联的就是分类表的主键<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/946d676f-8247-4b13-be71-f22fb4849b64-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>2.分类表与套餐表也是一对多的关系，一个分类下对应多个套餐，所以套餐表中有个外键字段category_id，关联的就是分类表的主键<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/075b8f12-67c3-4f9b-9eab-1f86916a6700-8085313.jpg" alt="img"></p>
+</li>
+<li>
+<p>3.而对于菜品和套餐是多对多的关系，所以建立了一张套餐菜品的中间表，中间表就记录了每一个套餐管理练的菜品和这个关联的菜品的份数</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>小结</p>
+<ul>
+<li>一对一可以添加外键unique保证唯一性<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://api2.mubu.com/v3/document_image/760d35fe-b14e-4aa1-87a7-72f9b5d7eef5-8085313.jpg" alt="img"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>MySQL02</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://www.fomal.cc/posts/f68e59c5.html">https://www.fomal.cc/posts/f68e59c5.html</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>Ceasteo🥝</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2023-12-05</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2024-03-11</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/database/"><div class="tags-punctuation"><svg class="faa-tada icon" style="height:1.1em;width:1.1em;fill:currentColor;position:relative;top:2px;margin-right:3px" aria-hidden="true"><use xlink:href="#icon-sekuaibiaoqian"></use></svg></div>database</a></div></div><link rel="stylesheet" href="/css/coin.css" media="defer" onload="this.media='all'"/><div class="post-reward"><button class="tip-button reward-button"><span class="tip-button__text">投喂作者</span><div class="coin-wrapper"><div class="coin"><div class="coin__middle"></div><div class="coin__back"></div><div class="coin__front"></div></div></div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://tuchuang.voooe.cn/images/2023/01/04/2.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tuchuang.voooe.cn/images/2023/01/04/2.webp" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://tuchuang.voooe.cn/images/2023/01/04/20f8e49805975b8f8.webp" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tuchuang.voooe.cn/images/2023/01/04/20f8e49805975b8f8.webp" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></button></div><audio id="coinAudio" src="https://npm.elemecdn.com/akilar-candyassets@1.0.36/audio/aowu.m4a"></audio><script defer="defer" src="/js/coin.js"></script><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/81896953.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://source.fomal.cc/img/default_cover_14.webp" onerror="onerror=null;src='/assets/r2.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">MySQL03</div></div></a></div><div class="next-post pull-right"><a href="/posts/6f87087f.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://source.fomal.cc/img/default_cover_14.webp" onerror="onerror=null;src='/assets/r2.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL01</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/6f87087f.html" title="MySQL01"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://source.fomal.cc/img/default_cover_14.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-11</div><div class="title">MySQL01</div></div></a></div><div><a href="/posts/81896953.html" title="MySQL03"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://source.fomal.cc/img/default_cover_14.webp" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2024-03-11</div><div class="title">MySQL03</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="author_top is-center"><div class="card-info-avatar"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://tuchuang.voooe.cn/images/2023/01/02/avatar.webp" onerror="this.onerror=null;this.src='/assets/r1.jpg'" alt="avatar"/></div><div class="author-status-box"><div class="author-status"><g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji><span>认真摸鱼中</span></div></div></div><b><div class="author-info__name">Ceasteo🥝</div></b><div class="author-info__description">Future is now 🍭🍭🍭</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/fomalhaut1998" title="前往作者的Github"><span>前往小窝</span><i class="faa-passing animated" style="padding-left:20px;display:inline-block;vertical-align:middle;"><svg class="icon" style="height:28px;width:28px;fill:currentColor;position:relative;top:5px"><use xlink:href="#icon-xiaoqiche"></use></svg></i></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="/assets/QRCode.jpg" target="_blank" title="微信"><svg class="social_icon faa-tada" aria-hidden="true" style="width:1.15em;height:1.15em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-weixin"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://res.abeim.cn/api/qq/?qq=1174008660" target="_blank" title="QQ"><svg class="social_icon faa-tada" aria-hidden="true" style="width:1.15em;height:1.15em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-QQ"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/220757832" target="_blank" title="B站"><svg class="social_icon faa-tada" aria-hidden="true" style="width:1.15em;height:1.15em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-bilibili"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:1174008660@qq.com" target="_blank" title="QQ邮箱"><svg class="social_icon faa-tada" aria-hidden="true" style="width:1.15em;height:1.15em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://leetcode.cn/u/fomalhaut1998" target="_blank" title="力扣"><svg class="social_icon faa-tada" aria-hidden="true" style="width:1.15em;height:1.15em;vertical-align:-0.15em;fill:currentColor;overflow:hidden;"><use xlink:href="#icon-leetcode"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><a class="faa-parent animated-hover"><svg class="faa-tada icon" style="height:25px;width:25px;fill:currentColor;position:relative;top:5px" aria-hidden="true"><use xlink:href="#icon-gonggao"></use></svg></a><span style="font-weight:bold">公告栏</span></div><div class="announcement_content"><center><b>--- 主域名 ---<br><a href="https://www.fomal.cc" title="此线路部署于Vercel" class="anno_content"><font color="#5ea6e5">fomal.cc</font></a>&nbsp;|&nbsp;<a target="_blank" rel="noopener" href="https://www.fomal.cn" title="此线路部署于Vercel" class="anno_content"><font color="#5ea6e5">fomal.cn</font></a><br>--- 备用域名 ---<br><a target="_blank" rel="noopener" href="https://netlify.fomal.cc" title="此线路部署于Netlify" class="anno_content"><font color="#5ea6e5">netlify.fomal.cc</font></a><br><a target="_blank" rel="noopener" href="https://cloudflare.fomal.cc" title="此线路部署于Cloudflare" class="anno_content"><font color="#5ea6e5">cloudflare.fomal.cc</font></a><br>--- 网站安卓APP ---<br>🍧<a target="_blank" rel="noopener" href="https://lskypro.acozycotage.net/Fomalhaut/Fomalhaut.apk" title="点这里可以下载网站的安卓APP" class="anno_content"><font color="#5ea6e5">点此下载</font></a>🍧</b></center></div><div id="welcome-info"></div></div><div class="sticky_layout"></div></div></main><footer id="footer" style="background-color: transparent;"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">格言🧬</p><div class="bg-ad"><div>再看看那个光点，它就在这里，这是家园，这是我们 —— 你所爱的每一个人，你认识的一个人，你听说过的每一个人，曾经有过的每一个人，都在它上面度过他们的一生✨</div><div class="btn-xz-box"><a class="btn-xz" target="_blank" rel="noopener" href="https://stellarium.org/">点击开启星辰之旅</a></div></div></div><div class="t-t-r"><p class="ft-t t-l-t">猜你想看💡</p><ul class="ft-links"><li><a href="/posts/eec9786.html">魔改指南</a><a href="/box/nav/">网址导航</a></li><li><a href="/social/link/">我的朋友</a><a href="/comments/">留点什么</a></li><li><a href="/personal/about/">关于作者</a><a href="/archives/">文章归档</a></li><li><a href="/categories/">文章分类</a><a href="/tags/">文章标签</a></li><li><a href="/box/Gallery/">我的画廊</a><a href="/personal/bb/">我的唠叨</a></li><li><a href="/site/time/">建设进程</a><a href="/site/census/">网站统计</a></li></ul></div></div></div><div class="ft-item-2"><p class="ft-t">推荐友链⌛</p><div class="ft-img-group"><div class="img-group-item"><a href="https://www.fomal.cc/" title="Fomalhaut🥝"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/60e5d4e39da7c077.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div><div class="img-group-item"><a href="javascript:void(0)" title="广告位招租"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://lskypro.acozycotage.net/LightPicture/2022/12/65307a5828af6790.webp" alt=""/></a></div></div></div></div><div class="copyright"><span><b>&copy;2022-2024</b></span><span><b>&nbsp;&nbsp;By Ceasteo🥝</b></span></div><div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v6.3.0"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/Frame-Hexo-blue.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v4.3.1"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/Theme-Butterfly-6513df.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用多线部署，主线路托管于Vercel"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/Hosted-Vercel-brightgreen.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://user.51.la/" style="margin-inline:5px" title="本站数据分析得益于51la技术支持"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/Analytics-51la-3db1eb.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://icp.gov.moe/?keyword=20226665" style="margin-inline:5px" title="本站已加入萌ICP豪华套餐，萌ICP备20226665号"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/萌ICP备-20226665-fe1384.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://bitiful.dogecast.com/buckets" style="margin-inline:5px" title="本网站经Service Worker分流至缤纷云对象存储"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src=" https://sourcebucket.s3.ladydaily.com/badge/Bucket-缤纷云-9c62da.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://www.netdun.net/" style="margin-inline:5px" title="本站使用网盾星球提供CDN加速与防护"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://sourcebucket.s3.ladydaily.com/badge/CDN-网盾星球-fff2cc.svg" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本网站源码由Github提供存储仓库"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src=" https://sourcebucket.s3.ladydaily.com/badge/Source-Github-d021d6.svg" alt=""/></a></p></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button class="share" type="button" title="右键模式" onclick="changeMouseMode()"><i class="fas fa-mouse"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog right_side"></i></button><button class="share" type="button" title="分享链接" onclick="share()"><i class="fas fa-share-nodes"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i><span id="percent">0<span>%</span></span></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div class="js-pjax" id="rightMenu"><div class="rightMenu-group rightMenu-small"><a class="rightMenu-item" href="javascript:window.history.back();"><i class="fa fa-arrow-left"></i></a><a class="rightMenu-item" href="javascript:window.history.forward();"><i class="fa fa-arrow-right"></i></a><a class="rightMenu-item" href="javascript:window.location.reload();"><i class="fa fa-refresh"></i></a><a class="rightMenu-item" href="javascript:rmf.scrollToTop();"><i class="fa fa-arrow-up"></i></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-text"><a class="rightMenu-item" href="javascript:rmf.copySelect();"><i class="fa fa-copy"></i><span>复制</span></a><a class="rightMenu-item" href="javascript:window.open(&quot;https://www.baidu.com/s?wd=&quot;+window.getSelection().toString());window.location.reload();"><i class="fa fa-search"></i><span>百度搜索</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-too"><a class="rightMenu-item" href="javascript:window.open(window.getSelection().toString());window.location.reload();"><i class="fa fa-link"></i><span>转到链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-paste"><a class="rightMenu-item" href="javascript:rmf.paste()"><i class="fa fa-copy"></i><span>粘贴</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-post"><a class="rightMenu-item" href="#post-comment"><i class="fas fa-comment"></i><span>空降评论</span></a><a class="rightMenu-item" href="javascript:rmf.copyWordsLink()"><i class="fa fa-link"></i><span>复制本文地址</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-to"><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>新窗口打开</span></a><a class="rightMenu-item" id="menu-too" href="javascript:rmf.open()"><i class="fa fa-link"></i><span>转到链接</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制链接</span></a></div><div class="rightMenu-group rightMenu-line hide" id="menu-img"><a class="rightMenu-item" href="javascript:rmf.saveAs()"><i class="fa fa-download"></i><span>保存图片</span></a><a class="rightMenu-item" href="javascript:rmf.openWithNewTab()"><i class="fa fa-window-restore"></i><span>在新窗口打开</span></a><a class="rightMenu-item" href="javascript:rmf.copyLink()"><i class="fa fa-copy"></i><span>复制图片链接</span></a></div><div class="rightMenu-group rightMenu-line"><a class="rightMenu-item" href="javascript:randomPost()"><i class="fa fa-paper-plane"></i><span>随便逛逛</span></a><a class="rightMenu-item" href="javascript:switchNightMode();"><i class="fa fa-moon"></i><span>昼夜切换</span></a><a class="rightMenu-item" href="/personal/about/"><i class="fa fa-info-circle"></i><span>关于博客</span></a><a class="rightMenu-item" href="javascript:toggleWinbox();"><i class="fas fa-cog"></i><span>美化设置</span></a><a class="rightMenu-item" href="javascript:rmf.fullScreen();"><i class="fas fa-expand"></i><span>切换全屏</span></a><a class="rightMenu-item" href="javascript:window.print();"><i class="fa-solid fa-print"></i><span>打印页面</span></a></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script async="async">var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())
+setTimeout(function(){preloader.endLoading();}, 5000);
+document.getElementById('loading-box').addEventListener('click',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: '',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: '',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://cdn.staticfile.org/jquery/3.6.3/jquery.min.js"></script><script async src="https://cdn1.tianli0.top/npm/vue@2.6.14/dist/vue.min.js"></script><script async src="https://cdn1.tianli0.top/npm/element-ui@2.15.6/lib/index.js"></script><script async src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script><script defer type="text/javascript" src="https://cdn1.tianli0.top/npm/sweetalert2@8.19.0/dist/sweetalert2.all.js"></script><script async src="//npm.elemecdn.com/pace-js@1.2.4/pace.min.js"></script><script defer src="https://cdn1.tianli0.top/gh/nextapps-de/winbox/dist/winbox.bundle.min.js"></script><script async src="//at.alicdn.com/t/c/font_3586335_hsivh70x0fm.js"></script><script async src="//at.alicdn.com/t/c/font_3636804_gr02jmjr3y9.js"></script><script async src="//at.alicdn.com/t/c/font_3612150_kfv55xn3u2g.js"></script><script async src="https://cdn.wpon.cn/2022-sucai/Gold-ingot.js"></script><canvas id="universe"></canvas><canvas id="snow"></canvas><script defer src="/js/fomal.js"></script><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.12/metingjs/Meting.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show","#web_bg",".js-pjax","#bibi","body > title","#app","#tag-echarts","#posts-echart","#categories-echarts"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://www.fomal.cc/categories/演示/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🍥 小Fの案例演示笔记 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://www.fomal.cc/categories/" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(33.333333333333336% - 5px);background: #e9e9e9;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: var(--text-bg-hover)}.magnet_link_more{color:#555}.magnet_link{color:black}.magnet_link:hover{color:white}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;posts/2013454d.html&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://source.fomal.cc/img/default_cover_14.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;posts/2013454d.html&quot;);" href="javascript:void(0);" alt="">Markdown语法与外挂标签写法汇总</a><div class="blog-slider__text">🥧本文汇总Markdown格式以及外挂标签在网页端的渲染效果，可作为文档进行查询</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;posts/2013454d.html&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script data-pjax src="https://npm.elemecdn.com/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>
+  function gitcalendar_injector_config(){
+      var parent_div_git = document.getElementById('gitZone');
+      var item_html = '<div class="recent-post-item" id="gitcalendarBar" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 320px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>';
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      console.log('已挂载gitcalendar')
+      }
+
+    if( document.getElementById('gitZone') && (location.pathname ==='/site/census/'|| '/site/census/' ==='all')){
+        gitcalendar_injector_config()
+        GitCalendarInit("/api?null",['#d9e0df', '#c6e0dc', '#a8dcd4', '#9adcd2', '#89ded1', '#77e0d0', '#5fdecb', '#47dcc6', '#39dcc3', '#1fdabe', '#00dab9'],'null')
+    }
+  </script><!-- hexo injector body_end end --></body></html>
