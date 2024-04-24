@@ -2989,7 +2989,7 @@ function setUniverse() {
 
 // 雪花开关
 if (localStorage.getItem("snow") == undefined) {
-  localStorage.setItem("snow", "none");
+  localStorage.setItem("snow", "block");
 }
 document.getElementById("snow").style.display = localStorage.getItem("snow");
 function setSnow() {
@@ -3177,10 +3177,10 @@ if (localStorage.getItem("blogbg") != undefined) {
   setBg(localStorage.getItem("blogbg"));
 } else {
   document.getElementById("defineBg").innerText = `:root{
-    --default-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/dm14.webp);
-    --darkmode-bg:url(https://lskypro.acozycotage.net/Fomalhaut/img/yuanshen1.webp);
-    --mobileday-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/snow.webp);
-    --mobilenight-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/mb8.webp);
+    --default-bg: url(https://img2.imgtp.com/2024/03/13/p2nEeA4s.jpg);
+    --darkmode-bg:url(https://img2.imgtp.com/2024/03/13/p2nEeA4s.jpg);
+    --mobileday-bg: url(https://img2.imgtp.com/2024/03/13/p2nEeA4s.jpg);
+    --mobilenight-bg: url(https://img2.imgtp.com/2024/03/13/p2nEeA4s.jpg);
   }`;
 }
 // 切换背景主函数
@@ -3193,14 +3193,10 @@ function changeBg(s) {
 // 设置背景属性
 function setBg(s) {
   document.getElementById("defineBg").innerText = `:root{
-    // --default-bg: ${s};
-    // --darkmode-bg: ${s};
-    // --mobileday-bg: ${s};
-    // --mobilenight-bg: ${s};
-    --default-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/dm14.webp);
-    --darkmode-bg:url(https://lskypro.acozycotage.net/Fomalhaut/img/yuanshen1.webp);
-    --mobileday-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/snow.webp);
-    --mobilenight-bg: url(https://lskypro.acozycotage.net/Fomalhaut/img/mb8.webp);
+    --default-bg: ${s};
+    --darkmode-bg: ${s};
+    --mobileday-bg: ${s};
+    --mobilenight-bg: ${s};
   }`;
 }
 
