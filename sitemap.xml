@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://starlike-daydream.github.io/posts/663f4bbf.html</loc>
+    
+    <lastmod>2025-03-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://starlike-daydream.github.io/posts/98e6bd54.html</loc>
+    
+    <lastmod>2024-10-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://starlike-daydream.github.io/posts/83713ae4.html</loc>
     
     <lastmod>2024-05-28</lastmod>
@@ -12,15 +30,6 @@
   
   <url>
     <loc>https://starlike-daydream.github.io/posts/4a6618d2.html</loc>
-    
-    <lastmod>2024-05-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://starlike-daydream.github.io/posts/98e6bd54.html</loc>
     
     <lastmod>2024-05-28</lastmod>
     
@@ -220,7 +229,7 @@
 
   <url>
     <loc>https://starlike-daydream.github.io/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -228,56 +237,63 @@
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/%E5%B0%8F%E7%BB%84%E5%91%A8%E6%8A%A5/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/git/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/JavaWeb/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/Java/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/Vim/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/Blog/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/tags/Building/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://starlike-daydream.github.io/tags/Algorithm/</loc>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -286,14 +302,14 @@
   
   <url>
     <loc>https://starlike-daydream.github.io/categories/%E5%91%A8%E6%8A%A5/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://starlike-daydream.github.io/categories/Computer-Learning/</loc>
-    <lastmod>2024-05-28</lastmod>
+    <lastmod>2025-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
