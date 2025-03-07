@@ -1378,7 +1378,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: var(--global-font), -apple-system, 'Quicksand', 'Nimbus Roman No9 L', 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'ST Heiti', sans-serif;;
+  font-family: LXGW, var(--global-font), -apple-system, 'Quicksand', 'Nimbus Roman No9 L', 'PingFang SC', 'Hiragino Sans GB', 'Noto Serif SC', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'ST Heiti', sans-serif;;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1508,7 +1508,7 @@ a:hover {
 #site-name,
 #aside-content .author-info__name,
 #aside-content .author-info__description {
-  font-family: var(--global-font);
+  font-family: LXGW,var(--global-font);
 }
 .is-center {
   text-align: center;
@@ -2027,7 +2027,7 @@ figure.highlight pre .javascript .function {
   height: 100%;
   vertical-align: top;
   text-align: center;
-  font-family: var(--global-font);
+  font-family: LXGW,var(--global-font);
 }
 @media screen and (max-width: 768px) {
   .error404 #error-wrap .error-content .error-info {
@@ -6640,43 +6640,51 @@ blockquote.pullquote.right {
 /* 字体引入 */
 @font-face {
   font-family: YSHST;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/优设好身体.woff2);
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/优设好身体.woff2);
   font-display: swap;
+}
+@font-face {
+  font-family: MINE;
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/霞鹜文楷.woff2);
+  /* src: url(/assets/LXGWWenKaiGBScreenR.ttf); */
+  font-display: block;
 }
 
 @font-face {
   font-family: MiSans;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/MiSans.woff2);
+  /* src: url(https://data-static.netdun.net/Fomalhaut/fonts/MiSans.woff2); */
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/MiSans.woff2);
   font-display: swap;
 }
 
 @font-face {
   font-family: HYTMR;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/HYTangMeiRen55W.woff2);
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/HYTangMeiRen55W.woff2);
   font-display: swap;
 }
 
 @font-face {
   font-family: LXGW;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/霞鹜文楷.woff2);
+  /* src: url(https://data-static.netdun.net/Fomalhaut/fonts/霞鹜文楷.woff2); */
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/霞鹜文楷.woff2);
   font-display: swap;
 }
 
 @font-face {
   font-family: TTQHB;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/甜甜圈海报字体.woff2);
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/甜甜圈海报字体.woff2);
   font-display: swap;
 }
 
 @font-face {
   font-family: Consolas_1;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/Consolas.woff2);
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/Consolas.woff2);
   font-display: swap;
 }
 
 @font-face {
   font-family: ZhuZiAWan;
-  src: url(https://data-static.netdun.net/Fomalhaut/fonts/ZhuZiAWan2.woff2);
+  src: url(https://sourcebucket.s3.bitiful.net/fonts/ZhuZiAWan2.woff2);
   font-display: swap;
 }
 
@@ -7831,7 +7839,7 @@ input#pic-link {
 
 /* heo 加载动画头像 */
 .loading-img {
-  background: url(https://img2.imgtp.com/2024/03/16/vQu5XPJ1.jpg)
+  background: url(https://s2.loli.net/2025/03/07/dgIGmuHJ4zTqQVY.jpg)
     no-repeat center center;
   background-size: cover;
 }
